@@ -357,7 +357,7 @@ size_t add_chunks(std::ifstream& file, chunk_ctr_type& chunk_ctr, size_t file_nu
         buf.clear();
         ctr += 1;
         if (ctr % 10000 == 0) {
-          std::cout << "\tProcessed bytes: " << total_len << std::endl;
+          std::cerr << "\tProcessed bytes: " << total_len << std::endl;
         }
       }
     }
@@ -506,12 +506,19 @@ int main(int argc, char* argv[]) {
               "reasonable estimate.\n\n";
     std::cout << "The -t flag will enable an experimental tensor compression mode"
               << "for any neural network file\n\n";
+    std::cout << "The -j flag will output the results in JSON format\n\n";
     return 1;
   }
   bool tensor_compression = false;
+  bool output_json = false;
   if (std::string(argv[1]) == "-t") {
     tensor_compression = true;
     std::cerr << "Experimental tensor compression mode on" << std::endl;
+    argv += 1;
+    argc -= 1;
+  }
+  if (std::string(argv[1]) == "-j") {
+    output_json = true;
     argv += 1;
     argc -= 1;
   }
@@ -545,9 +552,16 @@ int main(int argc, char* argv[]) {
     ++iter;
   }
 
-  std::cout << "Total bytes in all files: " << total_len << std::endl;
-  std::cout << "Total deduped bytes: " << chunk_bytes << std::endl;
-  std::cout << "Total deduped compressed bytes: " << compressed_chunk_bytes << std::endl;
+  if (output_json) {
+    std::cout << "{\"total_len\":" << total_len;
+    std::cout << ",\"chunk_bytes\":" << chunk_bytes;
+    std::cout << ",\"compressed_chunk_bytes\":" << compressed_chunk_bytes;
+    std::cout << "}\n";
+  } else {
+    std::cout << "Total bytes in all files: " << total_len << std::endl;
+    std::cout << "Total deduped bytes: " << chunk_bytes << std::endl;
+    std::cout << "Total deduped compressed bytes: " << compressed_chunk_bytes << std::endl;
+  }
 
   return 0;
 }
