@@ -120,8 +120,13 @@ The experiment can be reproduced by running the following command:
 ❯ de synthetic -s {{ rows }} -e 2 '{{ schema | tojson() }}'
 ```
 
-{% for operation in ["Appended", "Updated", "Inserted", "Deleted"] %}
-{% for edit in [1, 2] %}
+{%- for operation in ["Appended", "Updated", "Inserted", "Deleted"] -%}
+{% if operation == "Appended" -%}
+{% set edits = [1] %}
+{% else %}
+{% set edits = [1, 2] %}
+{% endif %}
+{%- for edit in edits -%}
 ### {{ operation }} - {{ rows }}Mi Rows / {{ cols }} Columns / {{ edit }} Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |

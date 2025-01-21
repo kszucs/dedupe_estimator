@@ -119,9 +119,6 @@ The experiment can be reproduced by running the following command:
 ❯ de synthetic -s 1 -e 1 '{"a": "int"}'
 ❯ de synthetic -s 1 -e 2 '{"a": "int"}'
 ```
-
-
-
 ### Appended - 1Mi Rows / 1 Columns / 1 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -129,14 +126,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s1c1e1-none-appended-nocdc.parquet.png)   | ![](synthetic/s1c1e1-none-appended-cdc.parquet.png)   | ![](synthetic/s1c1e1-none-appended.jsonlines.png) |
 |   Snappy    | ![](synthetic/s1c1e1-snappy-appended-nocdc.parquet.png) | ![](synthetic/s1c1e1-snappy-appended-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s1c1e1-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-appended-cdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-appended.jsonlines.png) |
-
-### Appended - 1Mi Rows / 1 Columns / 2 Edits:
-
-| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
-| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-|    None     | ![](synthetic/s1c1e2-none-appended-nocdc.parquet.png)   | ![](synthetic/s1c1e2-none-appended-cdc.parquet.png)   | ![](synthetic/s1c1e2-none-appended.jsonlines.png) |
-|   Snappy    | ![](synthetic/s1c1e2-snappy-appended-nocdc.parquet.png) | ![](synthetic/s1c1e2-snappy-appended-cdc.parquet.png) |                                                                                           |
-|    ZSTD     | ![](synthetic/s1c1e2-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-appended-cdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-appended.jsonlines.png) |
 
 
 
@@ -147,7 +136,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s1c1e1-none-updated-nocdc.parquet.png)   | ![](synthetic/s1c1e1-none-updated-cdc.parquet.png)   | ![](synthetic/s1c1e1-none-updated.jsonlines.png) |
 |   Snappy    | ![](synthetic/s1c1e1-snappy-updated-nocdc.parquet.png) | ![](synthetic/s1c1e1-snappy-updated-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s1c1e1-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-updated-cdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-updated.jsonlines.png) |
-
 ### Updated - 1Mi Rows / 1 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -165,7 +153,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s1c1e1-none-inserted-nocdc.parquet.png)   | ![](synthetic/s1c1e1-none-inserted-cdc.parquet.png)   | ![](synthetic/s1c1e1-none-inserted.jsonlines.png) |
 |   Snappy    | ![](synthetic/s1c1e1-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s1c1e1-snappy-inserted-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s1c1e1-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-inserted.jsonlines.png) |
-
 ### Inserted - 1Mi Rows / 1 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -183,7 +170,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s1c1e1-none-deleted-nocdc.parquet.png)   | ![](synthetic/s1c1e1-none-deleted-cdc.parquet.png)   | ![](synthetic/s1c1e1-none-deleted.jsonlines.png) |
 |   Snappy    | ![](synthetic/s1c1e1-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s1c1e1-snappy-deleted-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s1c1e1-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-deleted.jsonlines.png) |
-
 ### Deleted - 1Mi Rows / 1 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -202,9 +188,6 @@ The experiment can be reproduced by running the following command:
 ❯ de synthetic -s 4 -e 1 '{"a": "int"}'
 ❯ de synthetic -s 4 -e 2 '{"a": "int"}'
 ```
-
-
-
 ### Appended - 4Mi Rows / 1 Columns / 1 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -212,14 +195,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s4c1e1-none-appended-nocdc.parquet.png)   | ![](synthetic/s4c1e1-none-appended-cdc.parquet.png)   | ![](synthetic/s4c1e1-none-appended.jsonlines.png) |
 |   Snappy    | ![](synthetic/s4c1e1-snappy-appended-nocdc.parquet.png) | ![](synthetic/s4c1e1-snappy-appended-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s4c1e1-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-appended-cdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-appended.jsonlines.png) |
-
-### Appended - 4Mi Rows / 1 Columns / 2 Edits:
-
-| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
-| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-|    None     | ![](synthetic/s4c1e2-none-appended-nocdc.parquet.png)   | ![](synthetic/s4c1e2-none-appended-cdc.parquet.png)   | ![](synthetic/s4c1e2-none-appended.jsonlines.png) |
-|   Snappy    | ![](synthetic/s4c1e2-snappy-appended-nocdc.parquet.png) | ![](synthetic/s4c1e2-snappy-appended-cdc.parquet.png) |                                                                                           |
-|    ZSTD     | ![](synthetic/s4c1e2-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-appended-cdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-appended.jsonlines.png) |
 
 
 
@@ -230,7 +205,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s4c1e1-none-updated-nocdc.parquet.png)   | ![](synthetic/s4c1e1-none-updated-cdc.parquet.png)   | ![](synthetic/s4c1e1-none-updated.jsonlines.png) |
 |   Snappy    | ![](synthetic/s4c1e1-snappy-updated-nocdc.parquet.png) | ![](synthetic/s4c1e1-snappy-updated-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s4c1e1-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-updated-cdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-updated.jsonlines.png) |
-
 ### Updated - 4Mi Rows / 1 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -248,7 +222,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s4c1e1-none-inserted-nocdc.parquet.png)   | ![](synthetic/s4c1e1-none-inserted-cdc.parquet.png)   | ![](synthetic/s4c1e1-none-inserted.jsonlines.png) |
 |   Snappy    | ![](synthetic/s4c1e1-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s4c1e1-snappy-inserted-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s4c1e1-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-inserted.jsonlines.png) |
-
 ### Inserted - 4Mi Rows / 1 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -266,7 +239,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s4c1e1-none-deleted-nocdc.parquet.png)   | ![](synthetic/s4c1e1-none-deleted-cdc.parquet.png)   | ![](synthetic/s4c1e1-none-deleted.jsonlines.png) |
 |   Snappy    | ![](synthetic/s4c1e1-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s4c1e1-snappy-deleted-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s4c1e1-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-deleted.jsonlines.png) |
-
 ### Deleted - 4Mi Rows / 1 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -288,9 +260,6 @@ The experiment can be reproduced by running the following command:
 ❯ de synthetic -s 1 -e 1 '{"a": "int", "b": "str", "c": ["float"]}'
 ❯ de synthetic -s 1 -e 2 '{"a": "int", "b": "str", "c": ["float"]}'
 ```
-
-
-
 ### Appended - 1Mi Rows / 3 Columns / 1 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -298,14 +267,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s1c3e1-none-appended-nocdc.parquet.png)   | ![](synthetic/s1c3e1-none-appended-cdc.parquet.png)   | ![](synthetic/s1c3e1-none-appended.jsonlines.png) |
 |   Snappy    | ![](synthetic/s1c3e1-snappy-appended-nocdc.parquet.png) | ![](synthetic/s1c3e1-snappy-appended-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s1c3e1-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-appended-cdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-appended.jsonlines.png) |
-
-### Appended - 1Mi Rows / 3 Columns / 2 Edits:
-
-| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
-| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-|    None     | ![](synthetic/s1c3e2-none-appended-nocdc.parquet.png)   | ![](synthetic/s1c3e2-none-appended-cdc.parquet.png)   | ![](synthetic/s1c3e2-none-appended.jsonlines.png) |
-|   Snappy    | ![](synthetic/s1c3e2-snappy-appended-nocdc.parquet.png) | ![](synthetic/s1c3e2-snappy-appended-cdc.parquet.png) |                                                                                           |
-|    ZSTD     | ![](synthetic/s1c3e2-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-appended-cdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-appended.jsonlines.png) |
 
 
 
@@ -316,7 +277,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s1c3e1-none-updated-nocdc.parquet.png)   | ![](synthetic/s1c3e1-none-updated-cdc.parquet.png)   | ![](synthetic/s1c3e1-none-updated.jsonlines.png) |
 |   Snappy    | ![](synthetic/s1c3e1-snappy-updated-nocdc.parquet.png) | ![](synthetic/s1c3e1-snappy-updated-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s1c3e1-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-updated-cdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-updated.jsonlines.png) |
-
 ### Updated - 1Mi Rows / 3 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -334,7 +294,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s1c3e1-none-inserted-nocdc.parquet.png)   | ![](synthetic/s1c3e1-none-inserted-cdc.parquet.png)   | ![](synthetic/s1c3e1-none-inserted.jsonlines.png) |
 |   Snappy    | ![](synthetic/s1c3e1-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s1c3e1-snappy-inserted-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s1c3e1-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-inserted.jsonlines.png) |
-
 ### Inserted - 1Mi Rows / 3 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -352,7 +311,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s1c3e1-none-deleted-nocdc.parquet.png)   | ![](synthetic/s1c3e1-none-deleted-cdc.parquet.png)   | ![](synthetic/s1c3e1-none-deleted.jsonlines.png) |
 |   Snappy    | ![](synthetic/s1c3e1-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s1c3e1-snappy-deleted-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s1c3e1-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-deleted.jsonlines.png) |
-
 ### Deleted - 1Mi Rows / 3 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -371,9 +329,6 @@ The experiment can be reproduced by running the following command:
 ❯ de synthetic -s 4 -e 1 '{"a": "int", "b": "str", "c": ["float"]}'
 ❯ de synthetic -s 4 -e 2 '{"a": "int", "b": "str", "c": ["float"]}'
 ```
-
-
-
 ### Appended - 4Mi Rows / 3 Columns / 1 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -381,14 +336,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s4c3e1-none-appended-nocdc.parquet.png)   | ![](synthetic/s4c3e1-none-appended-cdc.parquet.png)   | ![](synthetic/s4c3e1-none-appended.jsonlines.png) |
 |   Snappy    | ![](synthetic/s4c3e1-snappy-appended-nocdc.parquet.png) | ![](synthetic/s4c3e1-snappy-appended-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s4c3e1-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-appended-cdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-appended.jsonlines.png) |
-
-### Appended - 4Mi Rows / 3 Columns / 2 Edits:
-
-| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
-| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-|    None     | ![](synthetic/s4c3e2-none-appended-nocdc.parquet.png)   | ![](synthetic/s4c3e2-none-appended-cdc.parquet.png)   | ![](synthetic/s4c3e2-none-appended.jsonlines.png) |
-|   Snappy    | ![](synthetic/s4c3e2-snappy-appended-nocdc.parquet.png) | ![](synthetic/s4c3e2-snappy-appended-cdc.parquet.png) |                                                                                           |
-|    ZSTD     | ![](synthetic/s4c3e2-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-appended-cdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-appended.jsonlines.png) |
 
 
 
@@ -399,7 +346,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s4c3e1-none-updated-nocdc.parquet.png)   | ![](synthetic/s4c3e1-none-updated-cdc.parquet.png)   | ![](synthetic/s4c3e1-none-updated.jsonlines.png) |
 |   Snappy    | ![](synthetic/s4c3e1-snappy-updated-nocdc.parquet.png) | ![](synthetic/s4c3e1-snappy-updated-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s4c3e1-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-updated-cdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-updated.jsonlines.png) |
-
 ### Updated - 4Mi Rows / 3 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -417,7 +363,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s4c3e1-none-inserted-nocdc.parquet.png)   | ![](synthetic/s4c3e1-none-inserted-cdc.parquet.png)   | ![](synthetic/s4c3e1-none-inserted.jsonlines.png) |
 |   Snappy    | ![](synthetic/s4c3e1-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s4c3e1-snappy-inserted-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s4c3e1-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-inserted.jsonlines.png) |
-
 ### Inserted - 4Mi Rows / 3 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
@@ -435,7 +380,6 @@ The experiment can be reproduced by running the following command:
 |    None     | ![](synthetic/s4c3e1-none-deleted-nocdc.parquet.png)   | ![](synthetic/s4c3e1-none-deleted-cdc.parquet.png)   | ![](synthetic/s4c3e1-none-deleted.jsonlines.png) |
 |   Snappy    | ![](synthetic/s4c3e1-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s4c3e1-snappy-deleted-cdc.parquet.png) |                                                                                           |
 |    ZSTD     | ![](synthetic/s4c3e1-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-deleted.jsonlines.png) |
-
 ### Deleted - 4Mi Rows / 3 Columns / 2 Edits:
 
 | Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
