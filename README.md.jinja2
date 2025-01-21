@@ -43,7 +43,7 @@ de dedup a.parquet b.parquet
 Generate synthetic data and visualize deduplication:
 
 ```bash
-de synthetic targetdir
+de synthetic -s 1 -e 1 '{"a": "int", "b": "str", "c": ["float"]}'
 ```
 
 Checkout all revisions of a file within a git repository:
@@ -92,7 +92,7 @@ stores data in a columnar fashion, which allows for efficient reads and writes.
 
 ## Brief Description of the Implementation
 
-...
+TODO
 
 # Results on Synthetic Data
 
