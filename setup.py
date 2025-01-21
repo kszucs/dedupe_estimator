@@ -20,15 +20,16 @@ setup(
     ext_modules=cythonize(extensions, language_level="3"),
     install_requires=[
         "click",
-        "plotly",
-        "tqdm",
-        "humanize",
         "faker",
-        "pyarrow",
+        "humanize",
+        "jinja2",
         "numpy",
-        "rich",
+        "pandas",
         "pillow",
-        "pandas"
+        "plotly",
+        "pyarrow",
+        "rich",
+        "tqdm",
     ],
     entry_points={
         "console_scripts": [

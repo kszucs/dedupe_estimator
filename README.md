@@ -94,7 +94,7 @@ stores data in a columnar fashion, which allows for efficient reads and writes.
 
 ...
 
-## Results on Synthetic Data with a Single Column `a: int`
+# Results on Synthetic Data
 
 The experiment can be reproduced by running the following command:
 
@@ -103,74 +103,98 @@ The experiment can be reproduced by running the following command:
 ```
 
 This will generate `$S` million (2^20) records of schema `<a: int>` with variants
-including `$E` edits (inserted/deleted/updated block of 10 records) evenly 
-distributed in the table and another variant with 5% of the records appended to 
+including `$E` edits (inserted/deleted/updated block of 10 records) evenly
+distributed in the table and another variant with 5% of the records appended to
 the end. The resulting parquet files have `$S` row groups.
 
-## Results on Synthetic Data with a Single Column `a: int` and 1Mi Rows
+
+
+
+
+## Results on Synthetic Data with {'a': 'int'} and 1Mi rows
+
+The experiment can be reproduced by running the following command:
 
 ```bash
 ❯ de synthetic -s 1 -e 1 '{"a": "int"}'
 ❯ de synthetic -s 1 -e 2 '{"a": "int"}'
 ```
 
-### Append - 1Mi Rows 1 Column:
 
-| Compression | Vanilla Parquet                                 | CDC Parquet                                   |
-| :---------: | ----------------------------------------------- | --------------------------------------------- |
-|    None     | ![](synthetic/s1c1e1-none-appended-nocdc.png)   | ![](synthetic/s1c1e1-none-appended-cdc.png)   |
-|   Snappy    | ![](synthetic/s1c1e1-snappy-appended-nocdc.png) | ![](synthetic/s1c1e1-snappy-appended-cdc.png) |
-|    ZSTD     | ![](synthetic/s1c1e1-zstd-appended-nocdc.png)   | ![](synthetic/s1c1e1-zstd-appended-cdc.png)   |
 
-### Update - 1Mi Rows 1 Column 1 Edit:
+### Appended - 1Mi Rows / 1 Columns / 1 Edits:
 
-| Compression | Vanilla Parquet                                  | CDC Parquet                                    |
-| :---------: | ------------------------------------------------ | ---------------------------------------------- |
-|    None     | ![](synthetic/s1c1e1-none-updated_a-nocdc.png)   | ![](synthetic/s1c1e1-none-updated_a-cdc.png)   |
-|   Snappy    | ![](synthetic/s1c1e1-snappy-updated_a-nocdc.png) | ![](synthetic/s1c1e1-snappy-updated_a-cdc.png) |
-|    ZSTD     | ![](synthetic/s1c1e1-zstd-updated_a-nocdc.png)   | ![](synthetic/s1c1e1-zstd-updated_a-cdc.png)   |
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c1e1-none-appended-nocdc.parquet.png)   | ![](synthetic/s1c1e1-none-appended-cdc.parquet.png)   | ![](synthetic/s1c1e1-none-appended.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c1e1-snappy-appended-nocdc.parquet.png) | ![](synthetic/s1c1e1-snappy-appended-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c1e1-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-appended-cdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-appended.jsonlines.png) |
 
-### Update - 1Mi Rows 1 Column 2 Edits:
+### Appended - 1Mi Rows / 1 Columns / 2 Edits:
 
-| Compression | Vanilla Parquet                                  | CDC Parquet                                    |
-| :---------: | ------------------------------------------------ | ---------------------------------------------- |
-|    None     | ![](synthetic/s1c1e2-none-updated_a-nocdc.png)   | ![](synthetic/s1c1e2-none-updated_a-cdc.png)   |
-|   Snappy    | ![](synthetic/s1c1e2-snappy-updated_a-nocdc.png) | ![](synthetic/s1c1e2-snappy-updated_a-cdc.png) |
-|    ZSTD     | ![](synthetic/s1c1e2-zstd-updated_a-nocdc.png)   | ![](synthetic/s1c1e2-zstd-updated_a-cdc.png)   |
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c1e2-none-appended-nocdc.parquet.png)   | ![](synthetic/s1c1e2-none-appended-cdc.parquet.png)   | ![](synthetic/s1c1e2-none-appended.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c1e2-snappy-appended-nocdc.parquet.png) | ![](synthetic/s1c1e2-snappy-appended-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c1e2-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-appended-cdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-appended.jsonlines.png) |
 
-### Insert - 1Mi Rows 1 Column 1 Edit:
 
-| Compression | Vanilla Parquet                                 | CDC Parquet                                   |
-| :---------: | ----------------------------------------------- | --------------------------------------------- |
-|    None     | ![](synthetic/s1c1e1-none-inserted-nocdc.png)   | ![](synthetic/s1c1e1-none-inserted-cdc.png)   |
-|   Snappy    | ![](synthetic/s1c1e1-snappy-inserted-nocdc.png) | ![](synthetic/s1c1e1-snappy-inserted-cdc.png) |
-|    ZSTD     | ![](synthetic/s1c1e1-zstd-inserted-nocdc.png)   | ![](synthetic/s1c1e1-zstd-inserted-cdc.png)   |
 
-### Insert - 1Mi Rows 1 Column 2 Edits:
+### Updated - 1Mi Rows / 1 Columns / 1 Edits:
 
-| Compression | Vanilla Parquet                                 | CDC Parquet                                   |
-| :---------: | ----------------------------------------------- | --------------------------------------------- |
-|    None     | ![](synthetic/s1c1e2-none-inserted-nocdc.png)   | ![](synthetic/s1c1e2-none-inserted-cdc.png)   |
-|   Snappy    | ![](synthetic/s1c1e2-snappy-inserted-nocdc.png) | ![](synthetic/s1c1e2-snappy-inserted-cdc.png) |
-|    ZSTD     | ![](synthetic/s1c1e2-zstd-inserted-nocdc.png)   | ![](synthetic/s1c1e2-zstd-inserted-cdc.png)   |
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c1e1-none-updated-nocdc.parquet.png)   | ![](synthetic/s1c1e1-none-updated-cdc.parquet.png)   | ![](synthetic/s1c1e1-none-updated.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c1e1-snappy-updated-nocdc.parquet.png) | ![](synthetic/s1c1e1-snappy-updated-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c1e1-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-updated-cdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-updated.jsonlines.png) |
 
-### Delete - 1Mi Rows 1 Column 1 Edit:
+### Updated - 1Mi Rows / 1 Columns / 2 Edits:
 
-| Compression | Vanilla Parquet                                | CDC Parquet                                  |
-| :---------: | ---------------------------------------------- | -------------------------------------------- |
-|    None     | ![](synthetic/s1c1e1-none-deleted-nocdc.png)   | ![](synthetic/s1c1e1-none-deleted-cdc.png)   |
-|   Snappy    | ![](synthetic/s1c1e1-snappy-deleted-nocdc.png) | ![](synthetic/s1c1e1-snappy-deleted-cdc.png) |
-|    ZSTD     | ![](synthetic/s1c1e1-zstd-deleted-nocdc.png)   | ![](synthetic/s1c1e1-zstd-deleted-cdc.png)   |
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c1e2-none-updated-nocdc.parquet.png)   | ![](synthetic/s1c1e2-none-updated-cdc.parquet.png)   | ![](synthetic/s1c1e2-none-updated.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c1e2-snappy-updated-nocdc.parquet.png) | ![](synthetic/s1c1e2-snappy-updated-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c1e2-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-updated-cdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-updated.jsonlines.png) |
 
-### Delete - 1Mi Rows 1 Column 2 Edits:
 
-| Compression | Vanilla Parquet                                | CDC Parquet                                  |
-| :---------: | ---------------------------------------------- | -------------------------------------------- |
-|    None     | ![](synthetic/s1c1e2-none-deleted-nocdc.png)   | ![](synthetic/s1c1e2-none-deleted-cdc.png)   |
-|   Snappy    | ![](synthetic/s1c1e2-snappy-deleted-nocdc.png) | ![](synthetic/s1c1e2-snappy-deleted-cdc.png) |
-|    ZSTD     | ![](synthetic/s1c1e2-zstd-deleted-nocdc.png)   | ![](synthetic/s1c1e2-zstd-deleted-cdc.png)   |
 
-## Results on Synthetic Data with a Single Column `a: int` and 4Mi Rows
+### Inserted - 1Mi Rows / 1 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c1e1-none-inserted-nocdc.parquet.png)   | ![](synthetic/s1c1e1-none-inserted-cdc.parquet.png)   | ![](synthetic/s1c1e1-none-inserted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c1e1-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s1c1e1-snappy-inserted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c1e1-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-inserted.jsonlines.png) |
+
+### Inserted - 1Mi Rows / 1 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c1e2-none-inserted-nocdc.parquet.png)   | ![](synthetic/s1c1e2-none-inserted-cdc.parquet.png)   | ![](synthetic/s1c1e2-none-inserted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c1e2-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s1c1e2-snappy-inserted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c1e2-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-inserted.jsonlines.png) |
+
+
+
+### Deleted - 1Mi Rows / 1 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c1e1-none-deleted-nocdc.parquet.png)   | ![](synthetic/s1c1e1-none-deleted-cdc.parquet.png)   | ![](synthetic/s1c1e1-none-deleted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c1e1-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s1c1e1-snappy-deleted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c1e1-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s1c1e1-zstd-deleted.jsonlines.png) |
+
+### Deleted - 1Mi Rows / 1 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c1e2-none-deleted-nocdc.parquet.png)   | ![](synthetic/s1c1e2-none-deleted-cdc.parquet.png)   | ![](synthetic/s1c1e2-none-deleted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c1e2-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s1c1e2-snappy-deleted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c1e2-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s1c1e2-zstd-deleted.jsonlines.png) |
+
+
+
+## Results on Synthetic Data with {'a': 'int'} and 4Mi rows
 
 The experiment can be reproduced by running the following command:
 
@@ -179,58 +203,246 @@ The experiment can be reproduced by running the following command:
 ❯ de synthetic -s 4 -e 2 '{"a": "int"}'
 ```
 
-### Append - 4Mi Rows 1 Column:
 
-| Compression | Vanilla Parquet                                 | CDC Parquet                                   |
-| :---------: | ----------------------------------------------- | --------------------------------------------- |
-|    None     | ![](synthetic/s4c1e1-none-appended-nocdc.png)   | ![](synthetic/s4c1e1-none-appended-cdc.png)   |
-|   Snappy    | ![](synthetic/s4c1e1-snappy-appended-nocdc.png) | ![](synthetic/s4c1e1-snappy-appended-cdc.png) |
-|    ZSTD     | ![](synthetic/s4c1e1-zstd-appended-nocdc.png)   | ![](synthetic/s4c1e1-zstd-appended-cdc.png)   |
 
-### Update - 4Mi Rows 1 Column 1 Edit:
+### Appended - 4Mi Rows / 1 Columns / 1 Edits:
 
-| Compression | Vanilla Parquet                                  | CDC Parquet                                    |
-| :---------: | ------------------------------------------------ | ---------------------------------------------- |
-|    None     | ![](synthetic/s4c1e1-none-updated_a-nocdc.png)   | ![](synthetic/s4c1e1-none-updated_a-cdc.png)   |
-|   Snappy    | ![](synthetic/s4c1e1-snappy-updated_a-nocdc.png) | ![](synthetic/s4c1e1-snappy-updated_a-cdc.png) |
-|    ZSTD     | ![](synthetic/s4c1e1-zstd-updated_a-nocdc.png)   | ![](synthetic/s4c1e1-zstd-updated_a-cdc.png)   |
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c1e1-none-appended-nocdc.parquet.png)   | ![](synthetic/s4c1e1-none-appended-cdc.parquet.png)   | ![](synthetic/s4c1e1-none-appended.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c1e1-snappy-appended-nocdc.parquet.png) | ![](synthetic/s4c1e1-snappy-appended-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c1e1-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-appended-cdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-appended.jsonlines.png) |
 
-### Update - 4Mi Rows 1 Column 2 Edits:
+### Appended - 4Mi Rows / 1 Columns / 2 Edits:
 
-| Compression | Vanilla Parquet                                  | CDC Parquet                                    |
-| :---------: | ------------------------------------------------ | ---------------------------------------------- |
-|    None     | ![](synthetic/s4c1e2-none-updated_a-nocdc.png)   | ![](synthetic/s4c1e2-none-updated_a-cdc.png)   |
-|   Snappy    | ![](synthetic/s4c1e2-snappy-updated_a-nocdc.png) | ![](synthetic/s4c1e2-snappy-updated_a-cdc.png) |
-|    ZSTD     | ![](synthetic/s4c1e2-zstd-updated_a-nocdc.png)   | ![](synthetic/s4c1e2-zstd-updated_a-cdc.png)   |
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c1e2-none-appended-nocdc.parquet.png)   | ![](synthetic/s4c1e2-none-appended-cdc.parquet.png)   | ![](synthetic/s4c1e2-none-appended.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c1e2-snappy-appended-nocdc.parquet.png) | ![](synthetic/s4c1e2-snappy-appended-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c1e2-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-appended-cdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-appended.jsonlines.png) |
 
-### Insert - 4Mi Rows 1 Column 1 Edit:
 
-| Compression | Vanilla Parquet                                 | CDC Parquet                                   |
-| :---------: | ----------------------------------------------- | --------------------------------------------- |
-|    None     | ![](synthetic/s4c1e1-none-inserted-nocdc.png)   | ![](synthetic/s4c1e1-none-inserted-cdc.png)   |
-|   Snappy    | ![](synthetic/s4c1e1-snappy-inserted-nocdc.png) | ![](synthetic/s4c1e1-snappy-inserted-cdc.png) |
-|    ZSTD     | ![](synthetic/s4c1e1-zstd-inserted-nocdc.png)   | ![](synthetic/s4c1e1-zstd-inserted-cdc.png)   |
 
-### Insert - 4Mi Rows 1 Column 2 Edits:
+### Updated - 4Mi Rows / 1 Columns / 1 Edits:
 
-| Compression | Vanilla Parquet                                 | CDC Parquet                                   |
-| :---------: | ----------------------------------------------- | --------------------------------------------- |
-|    None     | ![](synthetic/s4c1e2-none-inserted-nocdc.png)   | ![](synthetic/s4c1e2-none-inserted-cdc.png)   |
-|   Snappy    | ![](synthetic/s4c1e2-snappy-inserted-nocdc.png) | ![](synthetic/s4c1e2-snappy-inserted-cdc.png) |
-|    ZSTD     | ![](synthetic/s4c1e2-zstd-inserted-nocdc.png)   | ![](synthetic/s4c1e2-zstd-inserted-cdc.png)   |
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c1e1-none-updated-nocdc.parquet.png)   | ![](synthetic/s4c1e1-none-updated-cdc.parquet.png)   | ![](synthetic/s4c1e1-none-updated.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c1e1-snappy-updated-nocdc.parquet.png) | ![](synthetic/s4c1e1-snappy-updated-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c1e1-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-updated-cdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-updated.jsonlines.png) |
 
-### Delete - 4Mi Rows 1 Column 1 Edit:
+### Updated - 4Mi Rows / 1 Columns / 2 Edits:
 
-| Compression | Vanilla Parquet                                | CDC Parquet                                  |
-| :---------: | ---------------------------------------------- | -------------------------------------------- |
-|    None     | ![](synthetic/s4c1e1-none-deleted-nocdc.png)   | ![](synthetic/s4c1e1-none-deleted-cdc.png)   |
-|   Snappy    | ![](synthetic/s4c1e1-snappy-deleted-nocdc.png) | ![](synthetic/s4c1e1-snappy-deleted-cdc.png) |
-|    ZSTD     | ![](synthetic/s4c1e1-zstd-deleted-nocdc.png)   | ![](synthetic/s4c1e1-zstd-deleted-cdc.png)   |
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c1e2-none-updated-nocdc.parquet.png)   | ![](synthetic/s4c1e2-none-updated-cdc.parquet.png)   | ![](synthetic/s4c1e2-none-updated.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c1e2-snappy-updated-nocdc.parquet.png) | ![](synthetic/s4c1e2-snappy-updated-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c1e2-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-updated-cdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-updated.jsonlines.png) |
 
-### Delete - 4Mi Rows 1 Column 2 Edits:
 
-| Compression | Vanilla Parquet                                | CDC Parquet                                  |
-| :---------: | ---------------------------------------------- | -------------------------------------------- |
-|    None     | ![](synthetic/s4c1e2-none-deleted-nocdc.png)   | ![](synthetic/s4c1e2-none-deleted-cdc.png)   |
-|   Snappy    | ![](synthetic/s4c1e2-snappy-deleted-nocdc.png) | ![](synthetic/s4c1e2-snappy-deleted-cdc.png) |
-|    ZSTD     | ![](synthetic/s4c1e2-zstd-deleted-nocdc.png)   | ![](synthetic/s4c1e2-zstd-deleted-cdc.png)   |
+
+### Inserted - 4Mi Rows / 1 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c1e1-none-inserted-nocdc.parquet.png)   | ![](synthetic/s4c1e1-none-inserted-cdc.parquet.png)   | ![](synthetic/s4c1e1-none-inserted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c1e1-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s4c1e1-snappy-inserted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c1e1-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-inserted.jsonlines.png) |
+
+### Inserted - 4Mi Rows / 1 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c1e2-none-inserted-nocdc.parquet.png)   | ![](synthetic/s4c1e2-none-inserted-cdc.parquet.png)   | ![](synthetic/s4c1e2-none-inserted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c1e2-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s4c1e2-snappy-inserted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c1e2-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-inserted.jsonlines.png) |
+
+
+
+### Deleted - 4Mi Rows / 1 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c1e1-none-deleted-nocdc.parquet.png)   | ![](synthetic/s4c1e1-none-deleted-cdc.parquet.png)   | ![](synthetic/s4c1e1-none-deleted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c1e1-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s4c1e1-snappy-deleted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c1e1-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s4c1e1-zstd-deleted.jsonlines.png) |
+
+### Deleted - 4Mi Rows / 1 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c1e2-none-deleted-nocdc.parquet.png)   | ![](synthetic/s4c1e2-none-deleted-cdc.parquet.png)   | ![](synthetic/s4c1e2-none-deleted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c1e2-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s4c1e2-snappy-deleted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c1e2-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s4c1e2-zstd-deleted.jsonlines.png) |
+
+
+
+
+
+
+## Results on Synthetic Data with {'a': 'int', 'b': 'str', 'c': ['float']} and 1Mi rows
+
+The experiment can be reproduced by running the following command:
+
+```bash
+❯ de synthetic -s 1 -e 1 '{"a": "int", "b": "str", "c": ["float"]}'
+❯ de synthetic -s 1 -e 2 '{"a": "int", "b": "str", "c": ["float"]}'
+```
+
+
+
+### Appended - 1Mi Rows / 3 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c3e1-none-appended-nocdc.parquet.png)   | ![](synthetic/s1c3e1-none-appended-cdc.parquet.png)   | ![](synthetic/s1c3e1-none-appended.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c3e1-snappy-appended-nocdc.parquet.png) | ![](synthetic/s1c3e1-snappy-appended-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c3e1-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-appended-cdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-appended.jsonlines.png) |
+
+### Appended - 1Mi Rows / 3 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c3e2-none-appended-nocdc.parquet.png)   | ![](synthetic/s1c3e2-none-appended-cdc.parquet.png)   | ![](synthetic/s1c3e2-none-appended.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c3e2-snappy-appended-nocdc.parquet.png) | ![](synthetic/s1c3e2-snappy-appended-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c3e2-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-appended-cdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-appended.jsonlines.png) |
+
+
+
+### Updated - 1Mi Rows / 3 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c3e1-none-updated-nocdc.parquet.png)   | ![](synthetic/s1c3e1-none-updated-cdc.parquet.png)   | ![](synthetic/s1c3e1-none-updated.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c3e1-snappy-updated-nocdc.parquet.png) | ![](synthetic/s1c3e1-snappy-updated-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c3e1-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-updated-cdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-updated.jsonlines.png) |
+
+### Updated - 1Mi Rows / 3 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c3e2-none-updated-nocdc.parquet.png)   | ![](synthetic/s1c3e2-none-updated-cdc.parquet.png)   | ![](synthetic/s1c3e2-none-updated.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c3e2-snappy-updated-nocdc.parquet.png) | ![](synthetic/s1c3e2-snappy-updated-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c3e2-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-updated-cdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-updated.jsonlines.png) |
+
+
+
+### Inserted - 1Mi Rows / 3 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c3e1-none-inserted-nocdc.parquet.png)   | ![](synthetic/s1c3e1-none-inserted-cdc.parquet.png)   | ![](synthetic/s1c3e1-none-inserted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c3e1-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s1c3e1-snappy-inserted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c3e1-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-inserted.jsonlines.png) |
+
+### Inserted - 1Mi Rows / 3 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c3e2-none-inserted-nocdc.parquet.png)   | ![](synthetic/s1c3e2-none-inserted-cdc.parquet.png)   | ![](synthetic/s1c3e2-none-inserted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c3e2-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s1c3e2-snappy-inserted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c3e2-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-inserted.jsonlines.png) |
+
+
+
+### Deleted - 1Mi Rows / 3 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c3e1-none-deleted-nocdc.parquet.png)   | ![](synthetic/s1c3e1-none-deleted-cdc.parquet.png)   | ![](synthetic/s1c3e1-none-deleted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c3e1-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s1c3e1-snappy-deleted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c3e1-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s1c3e1-zstd-deleted.jsonlines.png) |
+
+### Deleted - 1Mi Rows / 3 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s1c3e2-none-deleted-nocdc.parquet.png)   | ![](synthetic/s1c3e2-none-deleted-cdc.parquet.png)   | ![](synthetic/s1c3e2-none-deleted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s1c3e2-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s1c3e2-snappy-deleted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s1c3e2-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s1c3e2-zstd-deleted.jsonlines.png) |
+
+
+
+## Results on Synthetic Data with {'a': 'int', 'b': 'str', 'c': ['float']} and 4Mi rows
+
+The experiment can be reproduced by running the following command:
+
+```bash
+❯ de synthetic -s 4 -e 1 '{"a": "int", "b": "str", "c": ["float"]}'
+❯ de synthetic -s 4 -e 2 '{"a": "int", "b": "str", "c": ["float"]}'
+```
+
+
+
+### Appended - 4Mi Rows / 3 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c3e1-none-appended-nocdc.parquet.png)   | ![](synthetic/s4c3e1-none-appended-cdc.parquet.png)   | ![](synthetic/s4c3e1-none-appended.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c3e1-snappy-appended-nocdc.parquet.png) | ![](synthetic/s4c3e1-snappy-appended-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c3e1-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-appended-cdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-appended.jsonlines.png) |
+
+### Appended - 4Mi Rows / 3 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c3e2-none-appended-nocdc.parquet.png)   | ![](synthetic/s4c3e2-none-appended-cdc.parquet.png)   | ![](synthetic/s4c3e2-none-appended.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c3e2-snappy-appended-nocdc.parquet.png) | ![](synthetic/s4c3e2-snappy-appended-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c3e2-zstd-appended-nocdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-appended-cdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-appended.jsonlines.png) |
+
+
+
+### Updated - 4Mi Rows / 3 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c3e1-none-updated-nocdc.parquet.png)   | ![](synthetic/s4c3e1-none-updated-cdc.parquet.png)   | ![](synthetic/s4c3e1-none-updated.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c3e1-snappy-updated-nocdc.parquet.png) | ![](synthetic/s4c3e1-snappy-updated-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c3e1-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-updated-cdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-updated.jsonlines.png) |
+
+### Updated - 4Mi Rows / 3 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c3e2-none-updated-nocdc.parquet.png)   | ![](synthetic/s4c3e2-none-updated-cdc.parquet.png)   | ![](synthetic/s4c3e2-none-updated.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c3e2-snappy-updated-nocdc.parquet.png) | ![](synthetic/s4c3e2-snappy-updated-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c3e2-zstd-updated-nocdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-updated-cdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-updated.jsonlines.png) |
+
+
+
+### Inserted - 4Mi Rows / 3 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c3e1-none-inserted-nocdc.parquet.png)   | ![](synthetic/s4c3e1-none-inserted-cdc.parquet.png)   | ![](synthetic/s4c3e1-none-inserted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c3e1-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s4c3e1-snappy-inserted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c3e1-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-inserted.jsonlines.png) |
+
+### Inserted - 4Mi Rows / 3 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c3e2-none-inserted-nocdc.parquet.png)   | ![](synthetic/s4c3e2-none-inserted-cdc.parquet.png)   | ![](synthetic/s4c3e2-none-inserted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c3e2-snappy-inserted-nocdc.parquet.png) | ![](synthetic/s4c3e2-snappy-inserted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c3e2-zstd-inserted-nocdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-inserted-cdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-inserted.jsonlines.png) |
+
+
+
+### Deleted - 4Mi Rows / 3 Columns / 1 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c3e1-none-deleted-nocdc.parquet.png)   | ![](synthetic/s4c3e1-none-deleted-cdc.parquet.png)   | ![](synthetic/s4c3e1-none-deleted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c3e1-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s4c3e1-snappy-deleted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c3e1-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s4c3e1-zstd-deleted.jsonlines.png) |
+
+### Deleted - 4Mi Rows / 3 Columns / 2 Edits:
+
+| Compression | Vanilla Parquet                                                               | CDC Parquet                                                                 | JSONLines                                                               |
+| :---------: | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|    None     | ![](synthetic/s4c3e2-none-deleted-nocdc.parquet.png)   | ![](synthetic/s4c3e2-none-deleted-cdc.parquet.png)   | ![](synthetic/s4c3e2-none-deleted.jsonlines.png) |
+|   Snappy    | ![](synthetic/s4c3e2-snappy-deleted-nocdc.parquet.png) | ![](synthetic/s4c3e2-snappy-deleted-cdc.parquet.png) |                                                                                           |
+|    ZSTD     | ![](synthetic/s4c3e2-zstd-deleted-nocdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-deleted-cdc.parquet.png)   | ![](synthetic/s4c3e2-zstd-deleted.jsonlines.png) |
+
+
+
