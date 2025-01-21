@@ -35,3 +35,5 @@ dedupe_estimator
 .vscode
 
 *.parquet
+*.jsonl
+*.jsonlines
