@@ -33,3 +33,5 @@
 
 dedupe_estimator
 .vscode
+
+*.parquet
